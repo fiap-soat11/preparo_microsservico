@@ -13,7 +13,5 @@ public partial class Preparo
 
     public DateTime DataStatus { get; set; }
 
-    public virtual Pedido IdPedidoNavigation { get; set; } = null!;
-
     public virtual Status IdStatusNavigation { get; set; } = null!;
 }
