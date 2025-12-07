@@ -11,7 +11,5 @@ public partial class Status
 
     public string? Descricao { get; set; }
 
-    public virtual ICollection<Pedido> Pedidos { get; set; } = new List<Pedido>();
-
     public virtual ICollection<Preparo> Preparos { get; set; } = new List<Preparo>();
 }
