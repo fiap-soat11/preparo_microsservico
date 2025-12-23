@@ -1,1 +1,1 @@
-﻿// MSTest Parallelize attribute removed - project uses xUnit
+﻿[assembly: Parallelize(Scope = ExecutionScope.MethodLevel)]

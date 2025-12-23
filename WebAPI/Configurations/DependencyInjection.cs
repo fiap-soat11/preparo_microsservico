@@ -2,7 +2,7 @@
 using Adapters.Controllers.Interfaces;
 using Adapters.Gateways;
 using Adapters.Gateways.Interfaces;
-using Application.Interfaces;
+
 using Application.UseCases;
 using DataSource.Context;
 using DataSource.Repositories;
@@ -37,27 +37,43 @@ namespace WebAPI.Configurations
             #endregion
 
 
+           
+
             /* ***** serviços de acesso a base ***** */
             Services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(mySqlConnectionString, ServerVersion.AutoDetect(mySqlConnectionString)));
             Services.AddScoped<IDataSource, DataSource.DataSource>();
 
 
             /* ***** serviços de orquestração ***** */
-            Services.AddScoped<IPedidoController, PedidoController>();
-
+            Services.AddScoped<ICategoriaController, CategoriaController>();
+            Services.AddScoped<IProdutoController, ProdutoController>();
+            
             /* ***** serviços de acesso a dados ***** */
-            Services.AddScoped<IStatusGateway, StatusGateway>();
-
+            Services.AddScoped<ICategoriaGateway, CategoriaGateway>();
+            Services.AddScoped<IProdutoGateway, ProdutoGateway>();
+            
 
             /* ***** serviços de negocio ***** */
-            Services.AddScoped<IPedidoUseCase, PedidoUseCase>();
-
-
-            Services.AddScoped<IStatusRepository, StatusRepository>();
+            Services.AddScoped<ICategoriaUseCase, CategoriaUseCase>();
+            Services.AddScoped<IProdutoUseCase, ProdutoUseCase>();
+            
+            Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+            Services.AddScoped<IProdutoRepository, ProdutoRepository>();
            
             return Services;
         }
 
+        public static IServiceCollection AddValidators(this IServiceCollection Services, IConfiguration configuration)
+        {
+            Services.AddFluentValidationAutoValidation();
+            //Services.AddValidatorsFromAssemblyContaining<ClienteRequestValidator>();
+            
+            return Services;
+        }
+
+
+
     }
+
 
 }
